@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+</head>
+<body>
+<div style="width: 45%; margin: 0 auto; padding: 20px; ">
+    <header style="background-image: linear-gradient(to bottom, rgba(0, 128, 128, 0.506), rgba(0, 0, 255, 0.673)); height: 15vh; backdrop-filter: blur(10px);">
+    </header>
+    <h1 style="margin: 1em 0; font-size: 2.3rem;">Your <span style="color: blue;">PeerLend OTP</span> Verification Code</h1>
+    <div style=" font-size: 18px; line-height: 1.7; border-bottom: 1px solid gray;">
+        <p style="font-weight: 800;">Dear <span th:text="${fullName}"></span>,</p>
+        <p>Thank you for choosing PeerLend, your decentralized P2P lending platform. To complete your registration and enhance security, please use the following One-Time Password (OTP) for verification:</p>
+        <p><strong> OTP: <span th:text="${OTP_Code}"></span></strong></p>
+        <p>This OTP is valid for <span>30 minute</span> minutes. Please do not share it with anyone for security reasons.</p>
+        <p>If you did not request this OTP, please ignore this email.</p>
+        <p>Welcome to PeerLend, where lending meets decentralization!</p>
+        <p style="font-style: italic;">Best regards, <br> PeerLend Team</p>
+    </div>
+    <footer style="background-image: linear-gradient(to bottom, rgba(0, 128, 128, 0.506), rgba(0, 0, 255, 0.673)); height: 15vh; backdrop-filter: blur(20px); text-align: center; padding: 1em; color: white;">
+        <p>Connect with us on:</p>
+        <div style="font-size: 1.5rem;">
+            <i class="ri-instagram-fill"></i>
+            <i class="ri-twitter-x-fill"></i>
+            <i class="ri-facebook-circle-fill"></i>
+        </div>
+        <p>&copy; All rights reserved - PeerLend</p>
+    </footer>
+</div>
+</body>
+</html>
