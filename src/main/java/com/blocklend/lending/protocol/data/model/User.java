@@ -22,11 +22,14 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private  Long id;
+    @Column(nullable = false, unique = true)
     private String email;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @Column(nullable = false)
     private String username;
     private Boolean isVerified = false;
+    @Column(nullable = false)
     private String password;
 
 

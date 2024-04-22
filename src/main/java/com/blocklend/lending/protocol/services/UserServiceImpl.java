@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService{
                 .build();
     }
 
-    private void validateDuplicateEmail(RegisterUserRequest registerUserRequest) throws EmailAlreadyExistException {
+    private void validateDuplicateEmail(RegisterUserRequest registerUserRequest) {
         Optional<User> isEmailDuplicate =  userRepository.findByEmail(registerUserRequest.getEmail());
         if (isEmailDuplicate.isPresent()) {
             throw new EmailAlreadyExistException("Email already exists");
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public AuthenticateUserResponse authenticate(LoginRequest loginRequest) throws UserNotFoundException {
+    public AuthenticateUserResponse authenticate(LoginRequest loginRequest)  {
         // Attempt to find the user by email
         User user = userRepository.findByEmail(loginRequest.getEmail())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService{
                 .build();
     }
 
-    public User findUserById(Long id) throws UserNotFoundException {
+    public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow( ()-> new UserNotFoundException(" user not found"));
     }
 

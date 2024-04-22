@@ -25,8 +25,8 @@ public class UserServicesTest {
     public void RegisterUser() {
         RegisterUserRequest registerUserRequest= RegisterUserRequest
                 .builder()
-                .username("ebukizy112")
-                .email("ebukizy1@gmail.com")
+                .username("timory")
+                .email("zarahgathoni76@gmail.com")
                 .password("ebukizy4u@")
                 .build();
         AuthenticateUserResponse registerUserResponse = userService.register(registerUserRequest);
