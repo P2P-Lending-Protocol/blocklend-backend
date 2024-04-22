@@ -35,10 +35,8 @@ public class SecurityConfig {
 
                 .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests( auth -> auth.requestMatchers(POST, "/api/v1/auth").permitAll()
-                        .requestMatchers(POST, "/api/v1/auth/verifyMail").permitAll()
-                        .requestMatchers(POST, "/api/v1/auth/login").permitAll()
-                        .requestMatchers(
+                .authorizeHttpRequests( auth -> auth.requestMatchers(
+                        "/api/v1/auth/**",
                                 "/api/v1/auth/**",
                                 "/v2/api-docs",
                                 "/v3/api-docs",
@@ -50,8 +48,7 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/webjars/**",
                                 "/swagger-ui.html"
-                        )
-                        .permitAll()
+                                ).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(se -> se.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
