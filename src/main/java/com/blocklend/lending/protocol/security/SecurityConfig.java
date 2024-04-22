@@ -38,6 +38,20 @@ public class SecurityConfig {
                 .authorizeHttpRequests( auth -> auth.requestMatchers(POST, "/api/v1/auth").permitAll()
                         .requestMatchers(POST, "/api/v1/auth/verifyMail").permitAll()
                         .requestMatchers(POST, "/api/v1/auth/login").permitAll()
+                        .requestMatchers(
+                                "/api/v1/auth/**",
+                                "/v2/api-docs",
+                                "/v3/api-docs",
+                                "/v3/api-docs/**",
+                                "/swagger-resources",
+                                "/swagger-resources/**",
+                                "/configuration/ui",
+                                "/configuration/security",
+                                "/swagger-ui/**",
+                                "/webjars/**",
+                                "/swagger-ui.html"
+                        )
+                        .permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(se -> se.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
