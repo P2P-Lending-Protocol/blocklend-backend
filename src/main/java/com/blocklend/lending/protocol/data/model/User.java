@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+import static jakarta.persistence.GenerationType.IDENTITY;
+
 @Getter
 @Setter
 @Builder
@@ -18,11 +20,13 @@ import java.util.List;
 @Table(name = "user")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     private  Long id;
     private String email;
     @Enumerated(EnumType.STRING)
     private Role role;
+    private String username;
+    private Boolean isVerified = false;
     private String password;
 
 

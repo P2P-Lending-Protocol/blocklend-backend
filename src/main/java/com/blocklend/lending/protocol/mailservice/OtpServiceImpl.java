@@ -3,6 +3,7 @@ package com.blocklend.lending.protocol.mailservice;
 import com.blocklend.lending.protocol.data.model.Otp;
 import com.blocklend.lending.protocol.data.repository.OtpRepository;
 import com.blocklend.lending.protocol.dtos.request.EmailRequest;
+import com.blocklend.lending.protocol.dtos.request.VerificationRequest;
 import com.blocklend.lending.protocol.dtos.response.EmailResponse;
 import com.blocklend.lending.protocol.exceptions.OtpCodeIsNotValidException;
 import com.blocklend.lending.protocol.exceptions.OtpDoesNotExistException;
@@ -15,6 +16,8 @@ import java.security.SecureRandom;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import static java.time.LocalDateTime.now;
 
 @Service
 @RequiredArgsConstructor
@@ -61,13 +64,15 @@ public class OtpServiceImpl implements  OtpService{
     }
 
     @Override
-    public String validateOtpCode(String email, String givenOtpCode) {
-        Otp foundOtp = otpRepository.findByEmail(email)
+//    @Transactional
+    public void validateOtpCode(VerificationRequest request) {
+        Otp foundOtp = otpRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new OtpDoesNotExistException("This otp does not exist"));
         String otpCode = foundOtp.getOtpCode();
-        if(!Objects.equals(otpCode, givenOtpCode))
-            throw new OtpCodeIsNotValidException(String.format("The otp code %s is not valid", givenOtpCode));
-        return "successfully validated";
+        if(!Objects.equals(otpCode, request.getOtp()))
+            throw new OtpCodeIsNotValidException(String.format("The otp code %s is not valid", request.getOtp()));
+        foundOtp.setConfirmedAt(now());
+        otpRepository.save(foundOtp);
     }
 
     private String generateSixDigitOtpCode() {
