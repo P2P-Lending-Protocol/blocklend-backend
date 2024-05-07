@@ -18,11 +18,12 @@ public class EmailServicesTest {
     private  OtpService optServices;
 
 
+
+
     @Test
     public void testSendOpt() {
         Recipient recipient = new Recipient();
-        recipient.setName("kemmy");
-        recipient.setEmail("atokemmy@gmail.com");
+        recipient.setEmail("ebukizy1@gmail.com");
         EmailResponse response = optServices.generateOtp(recipient);
         assertThat(response.getMessageId()).isNotNull();
         assertThat(response.getCode()).isNotNull();
@@ -33,6 +34,12 @@ public class EmailServicesTest {
 //        String optCode = optServices.validateOtpCode("ebukizy1@gmail.com", "186747");
 //        assertThat(optCode).isNotNull();
 //        assertEquals(optCode, "successfully validated");
+
+    }
+
+    @Test
+    public void sendOffer(){
+
 
     }
 

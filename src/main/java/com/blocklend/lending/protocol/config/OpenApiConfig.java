@@ -35,21 +35,21 @@ import io.swagger.v3.oas.annotations.servers.Server;
                         description = "prod Env",
                         url = "/"
                 )
-        },
-        security = {
-                @SecurityRequirement(
-                        name = "bearerAuth"
-                )
-
         }
+//        security = {
+//                @SecurityRequirement(
+//                        name = "bearerAuth"
+//                )
+//
+//        }
 )
-@SecurityScheme(
-        name = "bearerAuth",
-        description = "JWT auth description",
-        scheme = "bearer",
-        type = SecuritySchemeType.HTTP,
-        bearerFormat = "JWT",
-        in = SecuritySchemeIn.HEADER
-)
+//@SecurityScheme(
+//        name = "bearerAuth",
+//        description = "JWT auth description",
+//        scheme = "bearer",
+//        type = SecuritySchemeType.HTTP,
+//        bearerFormat = "JWT",
+//        in = SecuritySchemeIn.HEADER
+//)
 public class OpenApiConfig {
 }

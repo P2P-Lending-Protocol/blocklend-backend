@@ -1,14 +1,20 @@
 package com.blocklend.lending.protocol.services;
 
 import com.blocklend.lending.protocol.dtos.request.LoginRequest;
+import com.blocklend.lending.protocol.dtos.request.OfferRequest;
 import com.blocklend.lending.protocol.dtos.request.RegisterUserRequest;
 import com.blocklend.lending.protocol.dtos.request.VerificationRequest;
 import com.blocklend.lending.protocol.dtos.response.AuthenticateUserResponse;
+import com.blocklend.lending.protocol.dtos.response.EmailResponse;
 import com.blocklend.lending.protocol.dtos.response.OtpVerificationResponse;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -25,9 +31,7 @@ public class UserServicesTest {
     public void RegisterUser() {
         RegisterUserRequest registerUserRequest= RegisterUserRequest
                 .builder()
-                .username("kemmy")
                 .email("atokemmy@gmail.com")
-                .password("ebukizy4u@")
                 .build();
         AuthenticateUserResponse registerUserResponse = userService.register(registerUserRequest);
         assertThat(registerUserResponse).isNotNull();
@@ -45,14 +49,31 @@ public class UserServicesTest {
     }
 
     @Test
-    public void testUserLogin() {
-        LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setEmail("ebukizy1@gmail.com");
-        loginRequest.setPassword("ebukizy4u@");
-        AuthenticateUserResponse authResponse =  userService.authenticate(loginRequest);
-        assertThat(authResponse).isNotNull();
-        assertThat(authResponse.getId()).isNotNull();
-        assertThat(authResponse.getToken()).isNotNull();
+    public void sendOffer(){
+        OfferRequest offerRequest = new OfferRequest();
+        LocalDateTime now = LocalDateTime.now();
+        offerRequest.setUserEmail("atokemmy@gmail.com");
+        offerRequest.setAmount(1000000);
+        offerRequest.setInterest(15);
+        offerRequest.setReturnDate(now.plusDays(2));
+        EmailResponse response = userService.sendOffer(offerRequest);
+        assertThat(response.getMessageId()).isNotNull();
+        assertThat(response.getCode()).isNotNull();
     }
+
+    @Test
+    public void rejectOffer(){
+        EmailResponse response = userService.rejectOffer("ebukizy1@gmail.com");
+        assertThat(response.getMessageId()).isNotNull();
+        assertThat(response.getCode()).isNotNull();
+    }
+    @Test
+    public void testServiceLoan(){
+        EmailResponse response = userService.serviceLoan("ebukizy1@gmail.com");
+        assertThat(response.getMessageId()).isNotNull();
+        assertThat(response.getCode()).isNotNull();
+    }
+
+
 
 }

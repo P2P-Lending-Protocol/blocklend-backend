@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Serviced Confirmation</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <style>
+        .container {
+            width: 45%;
+        }
+
+        h1 {
+            font-size: 2.3rem;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 600px){
+            .container {
+                width: 90%;
+            }
+
+            p {
+                font-size:.8rem;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div style="margin: 0 auto; padding: 20px;" class="container">
+    <div style="background-color: white; text-align: center; margin: 1em 0;">
+        <img src="https://res.cloudinary.com/dy7el0ucd/image/upload/v1713701831/Logo_aatjg0.svg" alt="" style="width: 60px; height: 60px;">
+    </div>
+    <header style="background-image: linear-gradient(to bottom, #CD44EF, #324744e1); height: 15vh; backdrop-filter: blur(10px); color: white; display: flex; justify-content:  center; align-items: center;">
+        <h1 style="margin: 1em 0;">Loan Serviced Confirmation</h1>
+    </header>
+
+    <div style=" font-size: 18px; line-height: 1.7; border-bottom: 1px solid gray;">
+        <p style="font-weight: 800;">Dear <span th:text="${fullName}"></span>,</p>
+        <p>We are pleased to confirm that your loan request has been successfully serviced.</p>
+        <p>Thank you for choosing PeerLend for your lending needs. We appreciate your trust and look forward to serving you again in the future.</p>
+        <p>Welcome to PeerLend, where lending meets decentralization!</p>
+        <p style="font-style: italic;"><strong>Best regards,</strong></p>
+        <p style="font-style: italic;"><strong>PeerLend Team</strong></p>
+    </div>
+    <footer style="background-image: linear-gradient(to bottom, #CD44EF, #324744e1); backdrop-filter: blur(20px); border: none; text-align: center; padding: 2em 1em; color: white;">
+        <p>Connect with us on:</p>
+        <div style="font-size: 1.5rem;">
+            <i class="ri-instagram-fill"></i>
+            <i class="ri-twitter-x-fill"></i>
+            <i class="ri-facebook-circle-fill"></i>
+        </div>
+        <p>&copy; All rights reserved - PeerLend</p>
+    </footer>
+</div>
+</body>
+</html>

@@ -29,9 +29,7 @@ public class AuthenticationControllerTest {
     public void testRegisterEndPoint() {
         ObjectMapper mapper = new ObjectMapper();
         RegisterUserRequest request = new RegisterUserRequest();
-        request.setUsername("emmauel");
         request.setEmail("ebukizy1@gmail.com");
-        request.setPassword("ebukizy1");
         try {
             mockMvc.perform(post("/api/v1/auth")
                             .content(mapper.writeValueAsString(request))

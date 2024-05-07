@@ -34,21 +34,23 @@ public class OtpServiceImpl implements  OtpService{
          Otp otp = new Otp();
          otp.setEmail(recipient.getEmail());
          otp.setOtpCode(sixDigitOtpCode);
-        EmailResponse emailResponse =  emailOtpCode(recipient.getEmail(),  otp.getOtpCode(), recipient.getName());
+        EmailResponse emailResponse =  emailOtpCode(recipient.getEmail(),  otp.getOtpCode());
             otpRepository.save(otp);
         return emailResponse;
     }
 
 
-    private EmailResponse emailOtpCode(String userEmail, String otpCode, String fullName) {
+    private EmailResponse emailOtpCode(String userEmail, String otpCode) {
         //this sends a verification email to user using thymeleaf template
+        String userName = extractUserName(userEmail);
         Recipient recipient = new Recipient();
         recipient.setEmail(userEmail);
-        recipient.setName(fullName);
+        recipient.setName(userName);
         final Context context = new Context();
+        assert userName != null;
         context.setVariables(	//these are the placeholders in the email template
                 Map.of(
-                        "fullName", fullName,
+                        "fullName", userName,
                         "OTP_Code", otpCode
                 )
         );
@@ -80,6 +82,16 @@ public class OtpServiceImpl implements  OtpService{
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < 6; i++) builder.append(secureRandom.nextInt(10));
         return builder.toString();
+    }
+
+    private String extractUserName(String email) {
+        // Split the email at '@' and take the first part (username)
+        String[] parts = email.split("@");
+        if (parts.length > 1) {
+            return parts[0]; // Return the username
+        } else {
+            return null; // Return null or handle the error as needed
+        }
     }
 
 }
